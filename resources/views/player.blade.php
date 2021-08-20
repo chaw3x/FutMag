@@ -48,5 +48,12 @@
           <span>ultima actualización: {{$player["lastUpdated"]??''}}</span>
         </div>
       </div>
+      <form class="" action='{{url("/sent/")}}' method="post">
+        @csrf
+        <input type="text" name="email" value="">
+        <input type="hidden" name="name" value="{{$player["name"]}}">
+        <input type="hidden" name="date" value="{{$player["dateOfBirth"]}}">
+        <button type="submit" name="button">Enviar</button>
+      </form>
     </body>
     </html>

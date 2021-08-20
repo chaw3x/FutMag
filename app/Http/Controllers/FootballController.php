@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 // require_once 'HTTP/Request2.php';
 use Http;
+Use Mail;
+use App\Mail\JugadorFavorito;
 class FootballController extends Controller
 {
   public function liga(request $request)
@@ -31,5 +33,16 @@ class FootballController extends Controller
     ])->get('http://api.football-data.org/v2/players/'.$request->id);
     $player=$response->json();
     return view('player',compact('player'));
+  }
+  public function envio(request $request)
+  {
+    $sen=Mail::to($request->email)->queue(new JugadorFavorito(array(
+        'name'=>$request->name,
+        'date'=>$request->date,
+    )));
+    if ($sen) {
+      return "correo enviado";
+    }
+    return "error en el correo";
   }
 }
