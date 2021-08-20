@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\FootballController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('liga', [FootballController::class, 'liga']);
+Route::get('teams/{id}', [FootballController::class, 'team']);
+Route::get('player/{id}', [FootballController::class, 'player']);
